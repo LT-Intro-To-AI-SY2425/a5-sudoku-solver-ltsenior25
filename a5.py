@@ -182,15 +182,15 @@ def DFS(state: Board) -> Board:
     s = Stack([state])
 
     while not s.is_empty():
-        print(s)
+        # print(s)
         b: Board = s.pop()
         if b.goal_test():
             return b
         mcc = b.find_most_constrained_cell()
         row, col = mcc
-        print(row, col)
+        # print(row, col)
         for val in b.rows[row][col]:
-            print(val)
+            # print(val)
             cpy = copy.deepcopy(b)
             cpy.update(row, col, val)
             # cpy.print_pretty()
@@ -369,13 +369,13 @@ if __name__ == "__main__":
     assert g.goal_test() == True, "goal test test"
     print("All part 2 tests passed! Testing DFS and BFS next:")
 
-    # print("<<<<<<<<<<<<<< Testing DFS on First Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing DFS on First Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(True, first_moves)
+    test_dfs_or_bfs(True, first_moves)
 
-    # print("<<<<<<<<<<<<<< Testing DFS on Second Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing DFS on Second Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(True, second_moves)
+    test_dfs_or_bfs(True, second_moves)
 
     # print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
 

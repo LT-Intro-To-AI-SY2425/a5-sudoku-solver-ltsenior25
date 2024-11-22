@@ -180,23 +180,41 @@ def DFS(state: Board) -> Board:
         either None in the case of invalid input or a solved board
     """
     s = Stack([state])
+    num = 0
 
     while not s.is_empty():
         # print(s)
         b: Board = s.pop()
+        num += 1
+        # print(b)
         if b.goal_test():
+            print(f"Number of Iterations: {num}")
             return b
         mcc = b.find_most_constrained_cell()
-        row, col = mcc
-        # print(row, col)
-        for val in b.rows[row][col]:
-            # print(val)
+        # print(mcc)
+        
+        row = mcc[0]
+        col = mcc[1]
+        # print(b.rows[row][col])
+        # print()
+        for sel in b.rows[row][col]:
             cpy = copy.deepcopy(b)
-            cpy.update(row, col, val)
-            # cpy.print_pretty()
+            cpy.update(row, col, sel)
             s.push(cpy)
 
-    return None
+    # print(s)
+    # b = s.pop()
+    # b.print_pretty()
+    # print(b)
+    # mcc = b.find_most_constrained_cell()
+    # print(mcc)
+    
+    # b.update(mcc[0], mcc[1], b.rows[mcc[0]][mcc[1]][0])
+    # s.push(b)
+    
+    # print(s)
+    # b = s.pop()
+    # b.print_pretty()
 
 
 
@@ -212,7 +230,28 @@ def BFS(state: Board) -> Board:
     Returns:
         either None in the case of invalid input or a solved board
     """
-    pass
+    q = Queue([state])
+    num = 0
+
+    while not q.is_empty():
+        # print(q)
+        b: Board = q.pop()
+        num += 1
+        # print(b)
+        if b.goal_test():
+            print(f"Number of Iterations: {num}")
+            return b
+        mcc = b.find_most_constrained_cell()
+        # print(mcc)
+        
+        row = mcc[0]
+        col = mcc[1]
+        # print(b.rows[row][col])
+        # print()
+        for sel in b.rows[row][col]:
+            cpy = copy.deepcopy(b)
+            cpy.update(row, col, sel)
+            q.push(cpy)
 
 
 if __name__ == "__main__":
@@ -377,11 +416,11 @@ if __name__ == "__main__":
 
     test_dfs_or_bfs(True, second_moves)
 
-    # print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing BFS on First Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(False, first_moves)
+    test_dfs_or_bfs(False, first_moves)
 
-    # print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
+    print("<<<<<<<<<<<<<< Testing BFS on Second Game >>>>>>>>>>>>>>")
 
-    # test_dfs_or_bfs(False, second_moves)
+    test_dfs_or_bfs(False, second_moves)
     pass
